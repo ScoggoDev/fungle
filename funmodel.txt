@@ -1,0 +1,72 @@
+CREATE SEQUENCE users_id_seq;
+CREATE SEQUENCE friendslist_reqid_seq;
+CREATE SEQUENCE groups_reqid_seq;
+CREATE SEQUENCE blacklist_logid_seq;
+
+CREATE TABLE Users(
+	usr_id INTEGER NOT NULL PRIMARY KEY DEFAULT nextval(users_id_seq), 
+	usr_name VARCHAR(20) NOT NULL,
+	usr_pwd VARCHAR(50) NOT NULL,
+	usr_animal INT NOT NULL,
+	usr_phone VARCHAR(15) NOT NULL,
+	usr_group INT,
+	usr_status VARCHAR(10) DEFAULT 'ACTIVE',
+	usr_created DATE DEFAULT CURRENT_TIMESTAMP,
+
+	FOREIGN KEY (usr_group)
+		REFERENCES Groups(grp_reqid)
+);
+
+CREATE TABLE Friendslist(
+	flist_reqid INTEGER NOT NULL PRIMARY KEY DEFAULT nextval(friendslist_reqid_seq), 
+	flist_sender INT NOT NULL,
+	flist_receiver INT NOT NULL,
+	flist_status VARCHAR(8) NOT NULL DEFAULT 'PENDING',
+	flist_when DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+	FOREIGN KEY (flist_sender)
+		REFERENCES User(usr_id)
+	FOREIGN KEY (flist_receiver)
+		REFERENCES User(usr_id)
+);
+
+CREATE TABLE Groups(
+	grp_reqid INTEGER NOT NULL PRIMARY KEY DEFAULT nextval(groups_reqid_seq),
+	grp_id INTEGER NOT NULL,
+	grp_name VARCHAR(20) DEFAULT 'New Group',
+	grp_leader INT NOT NULL,
+	grp_receiver INT NOT NULL,
+		grp_status VARCHAR(8) NOT NULL DEFAULT 'PENDING',
+	grp_when DATETIME DEFAULT CURRENT_TIMESTAMP,
+	
+	FOREIGN KEY (grp_leader)
+		REFERENCES User(usr_id)
+	FOREIGN KEY (grp_receiver)
+		REFERENCES User(usr_id)
+);
+
+CREATE TABLE Blacklist(
+	blist_logid INTEGER NOT NULL PRIMARY KEY DEFAULT nextval(blacklist_logid_seq),
+	blist_userid INTEGER NOT NULL,
+	blist_reason VARCHAR(100) DEFAULT 'NO REASON SPECIFIED',
+	blist_status VARCHAR(12) DEFAULT 'SUSPENDED',
+	blist_when DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+	FOREIGN KEY (blist_userid)
+		REFERENCES User(usr_id)
+);
+
+CREATE TABLE Animal(
+	animal_id INTEGER NOT NULL PRIMARY KEY,
+	animal_name VARCHAR(12) NOT NULL,
+	animal_statid INT NOT NULL,
+	
+	FOREIGN KEY (animal_statid)
+		REFERENCES Stats(stat_id)
+);
+
+CREATE TABLE Stat(
+	stat_id INTEGER NOT NULL PRIMARY KEY,
+	stat_name VARCHAR(10) NOT NULL,
+	stat_desc VARCHAR(100) NOT NULL
+);

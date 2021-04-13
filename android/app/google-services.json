@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "907789462847",
+    "firebase_url": "https://fungle-8336f.firebaseio.com",
+    "project_id": "fungle-8336f",
+    "storage_bucket": "fungle-8336f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907789462847:android:794cebdba06b0f4eb1778a",
+        "android_client_info": {
+          "package_name": "com.example.sandbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907789462847-o2hica9esta03t4tj2ts4tfk8me035fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCby-rbKFCjMjK5OvMpHFyLt8bnc-nstiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907789462847-o2hica9esta03t4tj2ts4tfk8me035fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
